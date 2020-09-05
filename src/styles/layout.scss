@@ -1,7 +1,16 @@
 .row {
   display: flex;
   flex-direction: row;
+  margin-bottom: 12px;
   width: 100%;
+
+  &--centered {
+    justify-content: center;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .col {

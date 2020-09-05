@@ -17,7 +17,7 @@ class Text extends React.Component {
       <div className="input">
         <label className="input-label">
           <input type="text" className={`input-text${this.state.text.length > 0 ? ' input-text--filled' : ''}`} onChange={this._change} />
-          <span className="input-label__text">Address</span>
+          <span className="input-label__text">{this.props.label}</span>
         </label>
       </div>
     )
