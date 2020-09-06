@@ -43,7 +43,7 @@ class Form extends React.Component {
         value: ''
       },
       state: {
-        valid: false,
+        valid: true,
         value: ''
       },
       zip: {
@@ -61,15 +61,8 @@ class Form extends React.Component {
 
   _valid(section) {
     if (section === 'shipping') {
-      this.setState({shipping_complete: this.state.shipping.email.length
-        && this.state.shipping.phone.length
-        && this.state.shipping.first_name
-        && this.state.shipping.last_name.length
-        && this.state.shipping.address.length
-        && this.state.shipping.address2.length
-        && this.state.shipping.city.length
-        && this.state.shipping.zip.length
-      })
+      let shipping_complete = Object.keys(this.state.shipping).findIndex(key => this.state.shipping[key].valid === false) === -1
+      this.setState({shipping_complete})
     } else if (section === 'method') this.setState({method_complete: false})
     else if (section === 'payment') this.setState({payment_complete: false})
   }

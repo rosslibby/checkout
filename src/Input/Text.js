@@ -10,7 +10,12 @@ class Text extends React.Component {
 
   _change(e) {
     const value = e.target.value
-    this.setState({text: value}, () => this.props.change(this.props.section, this.props.name, value))
+    this.setState({text: value}, () => this.props.change(
+      this.props.section,
+      this.props.name,
+      value,
+      this.props.validate(value)
+    ))
   }
 
   render() {
@@ -25,6 +30,8 @@ class Text extends React.Component {
   }
 }
 
-Text.defaultProps = {}
+Text.defaultProps = {
+  validate: () => true
+}
 
 export default Text
