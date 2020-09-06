@@ -1,5 +1,4 @@
 import React from 'react'
-import 'styles/input.scss'
 
 class Select extends React.Component {
   constructor() {

@@ -1,5 +1,4 @@
 import React from 'react'
-import 'styles/input.scss'
 
 class Text extends React.Component {
   constructor() {

@@ -12,45 +12,57 @@ class Form extends React.Component {
     this._methodComplete = this._methodComplete.bind(this)
     this._paymentComplete = this._paymentComplete.bind(this)
     this._update = this._update.bind(this)
+    this._updateMethod = this._updateMethod.bind(this)
     this._valid = this._valid.bind(this)
-    this.state = {shipping_complete: false, method_complete: false, payment_complete: false, section: 'shipping', shipping: {
-      email: {
-        valid: false,
-        value: ''
-      },
-      phone: {
-        valid: false,
-        value: ''
-      },
-      first_name: {
-        valid: false,
-        value: ''
-      },
-      last_name: {
-        valid: false,
-        value: ''
-      },
-      address: {
-        valid: false,
-        value: ''
-      },
-      address2: {
-        valid: false,
-        value: ''
-      },
-      city: {
-        valid: false,
-        value: ''
-      },
-      state: {
-        valid: true,
-        value: ''
-      },
-      zip: {
-        valid: false,
-        value: ''
+    this.state = {
+      shipping_complete: false,
+      method_complete: true,
+      payment_complete: false,
+      section: 'shipping',
+      method: 'standard',
+      shipping: {
+        email: {
+          valid: false,
+          value: ''
+        },
+        phone: {
+          valid: false,
+          value: ''
+        },
+        first_name: {
+          valid: false,
+          value: ''
+        },
+        last_name: {
+          valid: false,
+          value: ''
+        },
+        address: {
+          valid: false,
+          value: ''
+        },
+        address2: {
+          valid: false,
+          value: ''
+        },
+        city: {
+          valid: false,
+          value: ''
+        },
+        state: {
+          valid: true,
+          value: ''
+        },
+        zip: {
+          valid: false,
+          value: ''
+        }
       }
-    }}
+    }
+  }
+
+  _updateMethod(method) {
+    this.setState({method})
   }
 
   _update(section, key, value, valid = false) {
@@ -116,8 +128,9 @@ class Form extends React.Component {
           complete={this._shippingComplete}
           update={this._update} />}
         {this.state.section === 'method' && <Method
+          options={this.state.method}
           complete={this._methodComplete}
-          update={this._update} />}
+          update={this._updateMethod} />}
         <div className="row row--centered">
           <button className="input-button" disabled={!enabled} onClick={this._continue}>
             <i className="fas fa-lock-alt" /> Continue
