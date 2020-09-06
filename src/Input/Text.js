@@ -25,4 +25,6 @@ class Text extends React.Component {
   }
 }
 
+Text.defaultProps = {}
+
 export default Text

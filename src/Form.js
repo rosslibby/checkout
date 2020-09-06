@@ -14,21 +14,48 @@ class Form extends React.Component {
     this._update = this._update.bind(this)
     this._valid = this._valid.bind(this)
     this.state = {shipping_complete: false, method_complete: false, payment_complete: false, section: 'shipping', shipping: {
-      email: '',
-      phone: '',
-      first_name: '',
-      last_name: '',
-      address: '',
-      address2: '',
-      city: '',
-      state: '',
-      zip: ''
+      email: {
+        valid: false,
+        value: ''
+      },
+      phone: {
+        valid: false,
+        value: ''
+      },
+      first_name: {
+        valid: false,
+        value: ''
+      },
+      last_name: {
+        valid: false,
+        value: ''
+      },
+      address: {
+        valid: false,
+        value: ''
+      },
+      address2: {
+        valid: false,
+        value: ''
+      },
+      city: {
+        valid: false,
+        value: ''
+      },
+      state: {
+        valid: false,
+        value: ''
+      },
+      zip: {
+        valid: false,
+        value: ''
+      }
     }}
   }
 
-  _update(section, key, value) {
+  _update(section, key, value, valid = false) {
     const data = this.state
-    data[section][key] = value
+    data[section][key] = {value, valid}
     this.setState(data, () => this._valid(section))
   }
 
