@@ -9,7 +9,8 @@ class Text extends React.Component {
   }
 
   _change(e) {
-    this.setState({text: e.target.value})
+    const value = e.target.value
+    this.setState({text: value}, () => this.props.change(this.props.section, this.props.name, value))
   }
 
   render() {

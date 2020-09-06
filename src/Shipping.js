@@ -1,5 +1,7 @@
 import React from 'react'
+import Select from 'Input/Select'
 import Text from 'Input/Text'
+import states from 'data/states'
 
 class Shipping extends React.Component {
   render() {
@@ -7,21 +9,53 @@ class Shipping extends React.Component {
       <div className="row">
         <div className="col">
           <div className="row">
-            <Text label="Email address" />
-            <Text label="Mobile phone" />
+            <Text
+              label="Email address"
+              change={this.props.update}
+              section="shipping"
+              name="email" />
+            <Text
+              label="Mobile phone"
+              change={this.props.update}
+              section="shipping"
+              name="phone" />
           </div>
           <div className="row">
-            <Text label="First name" />
-            <Text label="Last name" />
+            <Text
+              label="First name"
+              change={this.props.update}
+              section="shipping"
+              name="first_name" />
+            <Text
+              label="Last name"
+              change={this.props.update}
+              section="shipping"
+              name="last_name" />
           </div>
           <div className="row">
-            <Text label="Address" />
-            <Text label="Apt/Ste" />
+            <Text
+              label="Address"
+              change={this.props.update}
+              section="shipping"
+              name="address" />
+            <Text
+              label="Apt/Ste"
+              change={this.props.update}
+              section="shipping"
+              name="address2" />
           </div>
           <div className="row">
-            <Text label="Zip code" />
-            <Text label="City" />
-            <Text label="State" />
+            <Text
+              label="Zip code"
+              change={this.props.update}
+              section="shipping"
+              name="zip" />
+            <Text
+              label="City"
+              change={this.props.update}
+              section="shipping"
+              name="city" />
+            <Select name="state" default="State" label="State" options={states} required={true} value="" />
           </div>
         </div>
       </div>
