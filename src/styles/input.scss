@@ -177,6 +177,11 @@
     padding-bottom: 10px;
     width: 100%;
 
+    &--normal-padding {
+      padding-bottom: 15px;
+      padding-top: 15px;
+    }
+
     &::placeholder {
       color: #9da4aa;
     }

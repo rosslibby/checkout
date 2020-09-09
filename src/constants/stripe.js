@@ -1,0 +1,7 @@
+const stripe_key = 'pk_test_JJ1eMdKN0Hp4UFJ6kWXWO4ix00jtXzq5XG'
+
+export const CREATE_STRIPE_CUSTOMER = 'CREATE_STRIPE_CUSTOMER'
+export const CHARGE_STRIPE_CUSTOMER = 'CHARGE_STRIPE_CUSTOMER'
+export const STORE_PAYMENT_INTENT = 'STORE_PAYMENT_INTENT'
+
+export default stripe_key

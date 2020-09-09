@@ -1,6 +1,7 @@
 import React from 'react'
 import Method from 'Method'
 import Shipping from 'Shipping'
+import Card from 'Stripe/Card'
 
 class Form extends React.Component {
   constructor() {
@@ -95,7 +96,7 @@ class Form extends React.Component {
     const section = this.state.section === 'shipping'
       ? 'method'
       : this.state.section === 'method'
-        ? 'continue'
+        ? 'payment'
         : 'complete'
     this.setState({section})
   }
@@ -121,7 +122,7 @@ class Form extends React.Component {
             onClick={() => this._changeSection('method')}
             className={`progress-title${this.state.section === 'method' ? ' progress-title--active' : ''}`}>Method</div>
           <div
-            onClick={() => this._changeSection('continue')}
+            onClick={() => this._changeSection('payment')}
             className={`progress-title${this.state.section === 'continue' ? ' progress-title--active' : ''}`}>Payment</div>
         </div>
         {this.state.section === 'shipping' && <Shipping
@@ -131,11 +132,12 @@ class Form extends React.Component {
           options={this.state.method}
           complete={this._methodComplete}
           update={this._updateMethod} />}
-        <div className="row row--centered">
+        {this.state.section === 'payment' && <Card />}
+        {this.state.section !== 'payment' && <div className="row row--centered">
           <button className="input-button" disabled={!enabled} onClick={this._continue}>
             <i className="fas fa-lock-alt" /> Continue
           </button>
-        </div>
+        </div>}
       </div>
     )
   }
