@@ -1,7 +1,9 @@
 import React from 'react'
+import { createCustomer, createPaymentIntent, storePaymentIntent } from 'actions/stripe'
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import { connect } from 'react-redux'
 
-const Form = () => {
+const Form = ({createCustomer, createPaymentIntent}) => {
   const stripe = useStripe()
   const elements = useElements()
   const handle_submit = async e => {
@@ -9,6 +11,10 @@ const Form = () => {
 
     if (!stripe || !elements) return
 
+    await createCustomer()
+
+    const clientSecret = await createPaymentIntent(34.99)
+    console.log(clientSecret)
     const card_element = elements.getElement(CardElement)
     const {error, paymentMethod} = await stripe.createPaymentMethod({
       type: 'card',
@@ -35,4 +41,10 @@ const Form = () => {
   )
 }
 
-export default Form
+const mapDispatchToProps = dispatch => ({
+  createCustomer: () => dispatch(createCustomer()),
+  createPaymentIntent: total => dispatch(createPaymentIntent(total)),
+  storePaymentIntent: secret => dispatch(storePaymentIntent(secret))
+})
+
+export default connect(null, mapDispatchToProps)(Form)

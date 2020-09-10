@@ -2,13 +2,18 @@ import React from 'react'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import Form from 'Stripe/Form'
-import stripe_key from 'constants/stripe'
-const stripe_promise = loadStripe(stripe_key)
+import { connect } from 'react-redux'
 
-const Card = () => (
-  <Elements stripe={stripe_promise}>
-    <Form />
-  </Elements>
-)
+const Card = ({stripe}) => {
+  const stripe_promise = loadStripe(stripe.client_id)
 
-export default Card
+  return (
+    <Elements stripe={stripe_promise}>
+      <Form />
+    </Elements>
+  )
+}
+
+const mapStateToProps = ({stripe}) => ({stripe})
+
+export default connect(mapStateToProps)(Card)

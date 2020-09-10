@@ -3,15 +3,15 @@ import {API} from 'constants/api'
 import store from 'store'
 
 export const createCustomer = () => async dispatch => {
-  const {data, payment} = store.getState()
+  const customer_data = store.getState().customer
   const customer = await (await fetch(`${API}/stripe/customers`, {
     headers: {'Content-Type': 'application/json'},
     method: 'POST',
     body: JSON.stringify({
-      ...data,
-      accountId: payment.stripe.accountId
+      ...customer_data
     })
   })).json()
+  console.log(customer)
 
   return dispatch({
     type: CREATE_STRIPE_CUSTOMER,

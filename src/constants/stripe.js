@@ -1,4 +1,4 @@
-const stripe_key = 'pk_test_JJ1eMdKN0Hp4UFJ6kWXWO4ix00jtXzq5XG'
+const stripe_key = 'pk_test_T0ULtPYHaPA4ipD3CBCng3MA00AImGD2g4'
 
 export const CREATE_STRIPE_CUSTOMER = 'CREATE_STRIPE_CUSTOMER'
 export const CHARGE_STRIPE_CUSTOMER = 'CHARGE_STRIPE_CUSTOMER'

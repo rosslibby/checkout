@@ -2,6 +2,8 @@ import React from 'react'
 import Method from 'Method'
 import Shipping from 'Shipping'
 import Card from 'Stripe/Card'
+import { updateCustomer } from 'actions/customer'
+import { connect } from 'react-redux'
 
 class Form extends React.Component {
   constructor() {
@@ -68,8 +70,13 @@ class Form extends React.Component {
 
   _update(section, key, value, valid = false) {
     const data = this.state
+    const update_object = {}
+    update_object[key] = value
     data[section][key] = {value, valid}
-    this.setState(data, () => this._valid(section))
+    this.setState(data, () => {
+      this._valid(section)
+      this.props.updateCustomer(update_object)
+    })
   }
 
   _valid(section) {
@@ -143,4 +150,8 @@ class Form extends React.Component {
   }
 }
 
-export default Form
+const mapDispatchToProps = dispatch => ({
+  updateCustomer: data => dispatch(updateCustomer(data))
+})
+
+export default connect(null, mapDispatchToProps)(Form)
