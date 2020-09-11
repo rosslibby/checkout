@@ -11,7 +11,11 @@ const stripe = (state, action) => {
         customer: action.customer
       }
     default:
-      return Object.assign({}, state, {...state, client_id: 'pk_test_T0ULtPYHaPA4ipD3CBCng3MA00AImGD2g4'})
+      return Object.assign({}, state, {
+        ...state,
+        client_id: 'pk_test_T0ULtPYHaPA4ipD3CBCng3MA00AImGD2g4',
+        client_secret: 'sk_test_36KRre38DYVT6RG7K5ZeeHqr00okSWu02T'
+      })
   }
 }
 
