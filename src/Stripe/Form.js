@@ -3,7 +3,7 @@ import { createCustomer, createPaymentIntent, storePaymentIntent } from 'actions
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { connect } from 'react-redux'
 
-const Form = ({createCustomer, createPaymentIntent}) => {
+const Form = ({createCustomer, createPaymentIntent, customer}) => {
   const stripe = useStripe()
   const elements = useElements()
   const handle_submit = async e => {
@@ -15,14 +15,21 @@ const Form = ({createCustomer, createPaymentIntent}) => {
 
     const clientSecret = await createPaymentIntent(34.99)
     console.log(clientSecret)
-    const card_element = elements.getElement(CardElement)
-    const {error, paymentMethod} = await stripe.createPaymentMethod({
-      type: 'card',
-      card: card_element
+    const payment = await stripe.confirmCardPayment(clientSecret.client_secret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+        billing_details: {
+          name: customer.name,
+          email: customer.email,
+          phone: customer.phone
+        }
+      },
+      setup_future_usage: 'off_session'
     })
 
-    if (error) console.log('[error]', error)
-    else console.log('[PaymentMethod]', paymentMethod)
+    if (payment.paymentIntent.status === 'succeeded') {
+      console.log('Success!', payment)
+    }
   }
 
   return (
@@ -41,10 +48,11 @@ const Form = ({createCustomer, createPaymentIntent}) => {
   )
 }
 
+const mapStateToProps = ({customer}) => ({customer})
 const mapDispatchToProps = dispatch => ({
   createCustomer: () => dispatch(createCustomer()),
   createPaymentIntent: total => dispatch(createPaymentIntent(total)),
   storePaymentIntent: secret => dispatch(storePaymentIntent(secret))
 })
 
-export default connect(null, mapDispatchToProps)(Form)
+export default connect(mapStateToProps, mapDispatchToProps)(Form)
