@@ -1,0 +1,1 @@
+export const SET_SHIPPING = 'SET_SHIPPING'

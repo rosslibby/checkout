@@ -3,7 +3,6 @@ import store from 'store'
 
 const createPaymentIntent = (total, currency = 'usd') => async dispatch => {
   const {stripe} = store.getState()
-  console.log(total)
 
   const intent = await (await fetch(`${API}/stripe/payments/create`, {
     method: 'POST',

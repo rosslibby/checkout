@@ -11,7 +11,6 @@ export const createCustomer = () => async dispatch => {
       ...customer_data
     })
   })).json()
-  console.log(customer)
 
   return dispatch({
     type: CREATE_STRIPE_CUSTOMER,

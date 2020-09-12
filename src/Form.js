@@ -2,6 +2,7 @@ import React from 'react'
 import Method from 'Method'
 import Shipping from 'Shipping'
 import Card from 'Stripe/Card'
+import { setShipping } from 'actions/cart'
 import { updateCustomer } from 'actions/customer'
 import { connect } from 'react-redux'
 
@@ -22,6 +23,10 @@ class Form extends React.Component {
       method_complete: true,
       payment_complete: false,
       section: 'shipping',
+      methods: {
+        standard: 0,
+        expedited: 7.95
+      },
       method: 'standard',
       shipping: {
         email: {
@@ -65,7 +70,10 @@ class Form extends React.Component {
   }
 
   _updateMethod(method) {
-    this.setState({method})
+    this.setState({method}, () => this.props.setShipping(
+      method,
+      this.state.methods[method]
+    ))
   }
 
   _update(section, key, value, valid = false) {
@@ -150,8 +158,10 @@ class Form extends React.Component {
   }
 }
 
+const mapStateToProps = ({cart}) => ({cart})
 const mapDispatchToProps = dispatch => ({
+  setShipping: (name, rate) => dispatch(setShipping(name, rate)),
   updateCustomer: data => dispatch(updateCustomer(data))
 })
 
-export default connect(null, mapDispatchToProps)(Form)
+export default connect(mapStateToProps, mapDispatchToProps)(Form)
