@@ -1,8 +1,3 @@
-const product = (state, action) => {
-  switch(action.type) {
-    default:
-      return Object.assign({}, state, {...state})
-  }
-}
+const product = {}
 
 export default product

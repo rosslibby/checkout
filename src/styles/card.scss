@@ -9,6 +9,10 @@
   position: relative;
   width: 100%;
 
+  &--horizontal {
+    flex-direction: row;
+  }
+
   &--heading {
     padding-top: 60px;
   }
