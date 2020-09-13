@@ -10,7 +10,7 @@ const Product = ({cart, product}) => {
       <Image />
       <div className="product-info">
         <h1 className="product-title">{product.title}</h1>
-        <h1 className="product-title">{product.cost}</h1>
+        <h1 className="product-title">${product.cost}</h1>
       </div>
     </div>
   )
