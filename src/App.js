@@ -1,7 +1,7 @@
 import React from 'react'
 import Form from 'Form'
 import Product from 'Product/Product'
-import 'styles/index.scss'
+import 'styles/app.scss'
 
 function App() {
   return (
